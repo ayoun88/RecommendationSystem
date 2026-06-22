@@ -168,11 +168,11 @@ NDCG@10 = 0.1208                                        ↓
 | v4_weighted_decay03 | 0.1156 | weight(1:100:500) + time_decay=0.03 | ⬆️ | event 가중치와 시간 감쇠 결합이 단일 요소보다 효과적 |
 | **v5_decay01** | **0.1208** | **time_decay=0.1** | ⬆️ **ALS 단독 최고** | 30일 전 데이터를 현재의 약 5%로 감쇠하는 강도가 최적 |
 | v6_decay03 | 0.1165 | time_decay=0.3 | ⬇️ | 감쇠가 과해지면 유효 학습 데이터가 줄어 오히려 하락 |
-| v8_EASE | 0.0277 | EASE λ=500, decay=0.1 | ⬇️ ❌ | 극단적 가중치가 행렬 역산 시 수치 불안정 유발, 도입 포기 |
+| v8_EASE | 0.0277 | EASE λ=500, decay=0.1 | ⬇️ | 극단적 가중치가 행렬 역산 시 수치 불안정 유발, 도입 포기 |
 | v9_SASRec_baseline | 0.0842 | RecBole 기본 config, inter_num=5 | — | cold-start 42%가 동일한 popular 추천을 받는 구조 확인 |
-| v9-1_SASRec_heads8 | 0.0825 | hidden=128, n_heads=8, batch=2048 | ⬇️ ❌ | head당 16차원으로 표현력 부족, OOM 회피용 batch 축소도 효과 없음 |
+| v9-1_SASRec_heads8 | 0.0825 | hidden=128, n_heads=8, batch=2048 | ⬇️ | head당 16차원으로 표현력 부족, OOM 회피용 batch 축소도 효과 없음 |
 | v9-2_SASRec_heads4 | 0.0930 | n_heads=4, inter_num 5→3 | ⬆️ | head당 32차원 확보 + cold-start 비율 축소(42%→27.5%)가 동시에 기여 |
-| v9-3_SASRec_3step | 0.0898 | cart→서브카테고리 인기→전체 인기 | ⬇️ ❌ | cold-start 유저는 cart·카테고리 이력 자체가 부족해 단계 추가가 노이즈로 작용 |
+| v9-3_SASRec_3step | 0.0898 | cart→서브카테고리 인기→전체 인기 | ⬇️ | cold-start 유저는 cart·카테고리 이력 자체가 부족해 단계 추가가 노이즈로 작용 |
 | **v9-4_SASRec_2step** | **0.0933** | **cart→전체 인기 (단순화)** | ⬆️ **SASRec 단독 최고** | fallback 단계를 줄이는 단순화가 오히려 성능을 개선 |
 | **v10-1_Ensemble_7-3** | **0.1256** | **ALS×0.7 + SASRec×0.3** | ⬆️ **최종 SOTA** | 전체 패턴(ALS)과 최근 시퀀스(SASRec)의 상호보완 효과 입증 |
 | v10-2_Ensemble_6-4 | 0.1251 | ALS×0.6 + SASRec×0.4 | ⬇️ | SASRec 비중을 높일수록 약한 단독 모델의 영향이 커져 하락 |
